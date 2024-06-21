@@ -1,0 +1,68 @@
+# Ignorer les fichiers de configuration et d'environnement
+.env
+.env.test
+
+# Ignorer les dépendances et le cache
+/vendor/
+/node_modules/
+/composer.lock
+
+# Ignorer les fichiers de logs et de runtime
+/var/
+/logs/
+/tmp/
+
+# Ignorer les fichiers de build et de sortie
+/build/
+/dist/
+/public/build/
+/public/uploads/
+
+# Ignorer les fichiers de Docker
+/docker-compose.yml
+/docker-compose.override.yml
+/Dockerfile
+
+# Ignorer les fichiers de l'IDE et de l'éditeur
+/.idea/
+/.vscode/
+/*.swp
+/nbproject/
+
+# Ignorer les fichiers de tests temporaires
+/phpunit.xml.dist
+
+# Ignorer les fichiers de configuration locaux
+/*.local
+/*.override.yaml
+
+# Ignorer les fichiers de version de Symfony
+/symfony.lock
+
+# Ignorer les fichiers générés par Electron
+/electron_app/
+
+# Ignorer les fichiers de documentation générés
+/docs/
+/documentation/
+
+# Ignorer les fichiers de statistiques et d'analyses
+/.cache/
+/coverage/
+/profiler/
+
+# Ignorer les fichiers de configuration du serveur
+/apache/
+/nginx/
+
+# Ignorer les dépendances spécifiques à des librairies
+Backend/**/translations/
+/translations/
+/twig-bridge/
+/twig-bundle/
+/validator/
+/var-dumper/
+/var-exporter/
+/web-link/
+/web-profiler-bundle/
+/yaml/
