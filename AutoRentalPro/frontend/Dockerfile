@@ -15,6 +15,9 @@ COPY . .
 # Assurez-vous que les scripts ont les permissions d'exécution nécessaires
 RUN chmod +x /frontend/node_modules/.bin/react-scripts
 
+# Nettoyer le cache npm et réinstaller les dépendances en cas de problème
+RUN rm -rf node_modules package-lock.json && npm cache clean --force && npm install
+
 # Construire le projet
 RUN npm run build
 

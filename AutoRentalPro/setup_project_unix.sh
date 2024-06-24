@@ -6,23 +6,28 @@ function error_exit {
     exit 1
 }
 
-# Vérifier si Docker est installé
+# Vérification et installation de Docker
 if ! [ -x "$(command -v docker)" ]; then
-  echo 'Error: Docker is not installed.' >&2
-  exit 1
+    echo "Docker n'est pas installé. Installation de Docker..."
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh || error_exit "Échec de l'installation de Docker"
+    rm get-docker.sh
+else
+    echo "Docker est déjà installé."
 fi
-echo "Docker est déjà installé."
 
-# Vérifier si Docker Compose est installé
+# Vérification et installation de Docker Compose
 if ! [ -x "$(command -v docker-compose)" ]; then
-  echo 'Error: Docker Compose is not installed.' >&2
-  exit 1
+    echo "Docker Compose n'est pas installé. Installation de Docker Compose..."
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose || error_exit "Échec de l'installation de Docker Compose"
+else
+    echo "Docker Compose est déjà installé."
 fi
-echo "Docker Compose est déjà installé."
 
-# Arrêter le service MySQL sur la machine hôte
+# Arrêter le service MySQL local
 echo "Arrêt du service MySQL local..."
-sudo service mysql stop || error_exit "Échec de l'arrêt du service MySQL"
+sudo service mysql stop || echo "Le service MySQL local n'est pas en cours d'exécution."
 
 # Vérifier et tuer les processus utilisant le port 3306
 echo "Vérification du port 3306..."
@@ -56,9 +61,8 @@ docker-compose exec app npm install || error_exit "Échec de l'installation des 
 docker-compose exec app npm start || error_exit "Échec du démarrage du serveur de développement React Native"
 
 # Installation des dépendances pour le frontend web
-echo "Installation des dépendances pour le frontend web..."
-docker-compose exec frontend chmod +x /frontend/node_modules/.bin/react-scripts || error_exit "Échec de la mise à jour des permissions des scripts"
-docker-compose exec frontend npm install || error_exit "Échec de l'installation des dépendances du frontend"
+echo "Nettoyage du cache npm et installation des dépendances pour le frontend web..."
+docker-compose exec frontend sh -c "rm -rf node_modules package-lock.json && npm cache clean --force && npm install" || error_exit "Échec du nettoyage et de l'installation des dépendances du frontend"
 docker-compose exec frontend npm run build || error_exit "Échec de la construction du frontend web"
 
 echo "Le projet a été initialisé avec succès."
