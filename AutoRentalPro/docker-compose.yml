@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - ./Backend:/var/www/html:delegated
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html/public
+      DATABASE_URL: mysql://root:password@db:3306/autorentalpro
+    networks:
+      - autorentalpro-network
+
+  app:
+    build:
+      context: ./AutoRentalProApp
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./AutoRentalProApp:/usr/src/app
+    networks:
+      - autorentalpro-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - autorentalpro-network
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: autorentalpro
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - autorentalpro-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    networks:
+      - autorentalpro-network
+
+volumes:
+  db_data:
+
+networks:
+  autorentalpro-network:
+    driver: bridge
