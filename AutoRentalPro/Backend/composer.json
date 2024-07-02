@@ -10,7 +10,7 @@
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "*",
         "doctrine/doctrine-migrations-bundle": "^3.3",
-        "doctrine/orm": "*",
+        "doctrine/orm": "^2.11",
         "phpdocumentor/reflection-docblock": "^5.4",
         "phpstan/phpdoc-parser": "^1.29",
         "symfony/asset": "6.1.*",
@@ -54,6 +54,8 @@
         "symfony/web-profiler-bundle": "6.1.*"
     },
     "config": {
+        "symfony/symfony": "*",
+        "doctrine/orm": "2.12.0",
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
