@@ -24,10 +24,7 @@ class Car
     private ?int $annee = null;
 
     #[ORM\Column]
-    private ?bool $type_car = null;
-
-    #[ORM\Column]
-    private ?bool $type_achat = null;
+    private ?bool $type = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $puissance = null;
@@ -41,8 +38,8 @@ class Car
     #[ORM\Column]
     private ?int $kilometrage = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $modele = null;
+    #[ORM\Column]
+    private ?bool $modele = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -55,6 +52,12 @@ class Car
 
     #[ORM\Column(nullable: true)]
     private ?int $nombre_places = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $categorie = null;
+
+    #[ORM\Column]
+    private ?bool $type_commande = null;
 
     public function getId(): ?int
     {
@@ -97,26 +100,14 @@ class Car
         return $this;
     }
 
-    public function isTypeCar(): ?bool
+    public function isType(): ?bool
     {
-        return $this->type_car;
+        return $this->type;
     }
 
-    public function setTypeCar(bool $type_car): static
+    public function setType(bool $type): static
     {
-        $this->type_car = $type_car;
-
-        return $this;
-    }
-
-    public function isTypeAchat(): ?bool
-    {
-        return $this->type_achat;
-    }
-
-    public function setTypeAchat(bool $type_achat): static
-    {
-        $this->type_achat = $type_achat;
+        $this->type = $type;
 
         return $this;
     }
@@ -169,12 +160,12 @@ class Car
         return $this;
     }
 
-    public function getModele(): ?string
+    public function isModele(): ?bool
     {
         return $this->modele;
     }
 
-    public function setModele(?string $modele): static
+    public function setModele(bool $modele): static
     {
         $this->modele = $modele;
 
@@ -225,6 +216,30 @@ class Car
     public function setNombrePlaces(?int $nombre_places): static
     {
         $this->nombre_places = $nombre_places;
+
+        return $this;
+    }
+
+    public function isCategorie(): ?bool
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?bool $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function isTypeCommande(): ?bool
+    {
+        return $this->type_commande;
+    }
+
+    public function setTypeCommande(bool $type_commande): static
+    {
+        $this->type_commande = $type_commande;
 
         return $this;
     }
