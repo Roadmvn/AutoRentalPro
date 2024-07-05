@@ -17,10 +17,7 @@ class Commande
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_commande = null;
 
-    #[ORM\Column]
-    private ?bool $type_commande = null;
-
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $duree_location = null;
 
     #[ORM\Column]
@@ -43,24 +40,12 @@ class Commande
         return $this;
     }
 
-    public function isTypeCommande(): ?bool
-    {
-        return $this->type_commande;
-    }
-
-    public function setTypeCommande(bool $type_commande): static
-    {
-        $this->type_commande = $type_commande;
-
-        return $this;
-    }
-
     public function getDureeLocation(): ?int
     {
         return $this->duree_location;
     }
 
-    public function setDureeLocation(int $duree_location): static
+    public function setDureeLocation(?int $duree_location): static
     {
         $this->duree_location = $duree_location;
 

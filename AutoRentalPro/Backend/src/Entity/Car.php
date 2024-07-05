@@ -23,41 +23,41 @@ class Car
     #[ORM\Column]
     private ?int $annee = null;
 
-    #[ORM\Column]
-    private ?bool $type = null;
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $puissance = null;
 
-    #[ORM\Column]
-    private ?bool $carburant = null;
+    #[ORM\Column(length: 255)]
+    private ?string $carburant = null;
 
-    #[ORM\Column]
-    private ?bool $boite_vitesse = null;
+    #[ORM\Column(length: 255)]
+    private ?string $boite_vitesse = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $kilometrage = null;
 
-    #[ORM\Column]
-    private ?bool $modele = null;
+    #[ORM\Column(length: 255)]
+    private ?string $modele = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 4)]
     private ?string $prix = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $nombre_portes = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $nombre_places = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $categorie = null;
+    private ?int $nombre_portes = null;
 
-    #[ORM\Column]
-    private ?bool $type_commande = null;
+    #[ORM\Column(length: 255)]
+    private ?string $categorie = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type_commande = null;
 
     public function getId(): ?int
     {
@@ -100,12 +100,12 @@ class Car
         return $this;
     }
 
-    public function isType(): ?bool
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(bool $type): static
+    public function setType(string $type): static
     {
         $this->type = $type;
 
@@ -124,24 +124,24 @@ class Car
         return $this;
     }
 
-    public function isCarburant(): ?bool
+    public function getCarburant(): ?string
     {
         return $this->carburant;
     }
 
-    public function setCarburant(bool $carburant): static
+    public function setCarburant(string $carburant): static
     {
         $this->carburant = $carburant;
 
         return $this;
     }
 
-    public function isBoiteVitesse(): ?bool
+    public function getBoiteVitesse(): ?string
     {
         return $this->boite_vitesse;
     }
 
-    public function setBoiteVitesse(bool $boite_vitesse): static
+    public function setBoiteVitesse(string $boite_vitesse): static
     {
         $this->boite_vitesse = $boite_vitesse;
 
@@ -153,19 +153,19 @@ class Car
         return $this->kilometrage;
     }
 
-    public function setKilometrage(int $kilometrage): static
+    public function setKilometrage(?int $kilometrage): static
     {
         $this->kilometrage = $kilometrage;
 
         return $this;
     }
 
-    public function isModele(): ?bool
+    public function getModele(): ?string
     {
         return $this->modele;
     }
 
-    public function setModele(bool $modele): static
+    public function setModele(string $modele): static
     {
         $this->modele = $modele;
 
@@ -196,18 +196,6 @@ class Car
         return $this;
     }
 
-    public function getNombrePortes(): ?int
-    {
-        return $this->nombre_portes;
-    }
-
-    public function setNombrePortes(?int $nombre_portes): static
-    {
-        $this->nombre_portes = $nombre_portes;
-
-        return $this;
-    }
-
     public function getNombrePlaces(): ?int
     {
         return $this->nombre_places;
@@ -220,24 +208,36 @@ class Car
         return $this;
     }
 
-    public function isCategorie(): ?bool
+    public function getNombrePortes(): ?int
+    {
+        return $this->nombre_portes;
+    }
+
+    public function setNombrePortes(?int $nombre_portes): static
+    {
+        $this->nombre_portes = $nombre_portes;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?string
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?bool $categorie): static
+    public function setCategorie(string $categorie): static
     {
         $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function isTypeCommande(): ?bool
+    public function getTypeCommande(): ?string
     {
         return $this->type_commande;
     }
 
-    public function setTypeCommande(bool $type_commande): static
+    public function setTypeCommande(string $type_commande): static
     {
         $this->type_commande = $type_commande;
 

@@ -18,7 +18,7 @@ class Entretien
     private ?\DateTimeInterface $date_entretien = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    private ?string $detail = null;
 
     public function getId(): ?int
     {
@@ -37,14 +37,14 @@ class Entretien
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDetail(): ?string
     {
-        return $this->description;
+        return $this->detail;
     }
 
-    public function setDescription(string $description): static
+    public function setDetail(string $detail): static
     {
-        $this->description = $description;
+        $this->detail = $detail;
 
         return $this;
     }

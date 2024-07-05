@@ -20,8 +20,8 @@ class Commentaire
     #[ORM\Column(type: Types::TEXT)]
     private ?string $commentaire = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $note = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $note = null;
 
     public function getId(): ?int
     {
@@ -52,12 +52,12 @@ class Commentaire
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?string
     {
         return $this->note;
     }
 
-    public function setNote(?int $note): static
+    public function setNote(?string $note): static
     {
         $this->note = $note;
 

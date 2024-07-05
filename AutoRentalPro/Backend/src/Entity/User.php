@@ -28,7 +28,7 @@ class User
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ville = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $telephone = null;
 
     public function getId(): ?int
@@ -101,7 +101,7 @@ class User
         return $this->telephone;
     }
 
-    public function setTelephone(float $telephone): static
+    public function setTelephone(?float $telephone): static
     {
         $this->telephone = $telephone;
 

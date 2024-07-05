@@ -14,17 +14,17 @@ class Paiement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 20, scale: 4)]
     private ?string $montant = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_paiement = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $methode_paiement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $methode_paiment = null;
 
-    #[ORM\Column]
-    private ?bool $statut_paiement = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statut_paiement = null;
 
     public function getId(): ?int
     {
@@ -55,24 +55,24 @@ class Paiement
         return $this;
     }
 
-    public function getMethodePaiement(): ?string
+    public function getMethodePaiment(): ?string
     {
-        return $this->methode_paiement;
+        return $this->methode_paiment;
     }
 
-    public function setMethodePaiement(string $methode_paiement): static
+    public function setMethodePaiment(?string $methode_paiment): static
     {
-        $this->methode_paiement = $methode_paiement;
+        $this->methode_paiment = $methode_paiment;
 
         return $this;
     }
 
-    public function isStatutPaiement(): ?bool
+    public function getStatutPaiement(): ?string
     {
         return $this->statut_paiement;
     }
 
-    public function setStatutPaiement(bool $statut_paiement): static
+    public function setStatutPaiement(?string $statut_paiement): static
     {
         $this->statut_paiement = $statut_paiement;
 

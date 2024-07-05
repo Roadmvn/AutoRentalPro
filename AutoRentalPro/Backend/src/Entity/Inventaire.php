@@ -13,22 +13,22 @@ class Inventaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $quantitÃe = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $quantite = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getQuantitÃe(): ?int
+    public function getQuantite(): ?int
     {
-        return $this->quantitÃe;
+        return $this->quantite;
     }
 
-    public function setQuantitÃe(int $quantitÃe): static
+    public function setQuantite(?int $quantite): static
     {
-        $this->quantitÃe = $quantitÃe;
+        $this->quantite = $quantite;
 
         return $this;
     }
