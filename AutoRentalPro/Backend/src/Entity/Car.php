@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,6 +60,21 @@ class Car
 
     #[ORM\Column(length: 255)]
     private ?string $type_commande = null;
+
+    #[ORM\ManyToOne(inversedBy: 'car')]
+    private ?Commande $commande = null;
+
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Entretien::class)]
+    private Collection $entretien;
+
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Inventaire::class)]
+    private Collection $inventaire;
+
+    public function __construct()
+    {
+        $this->entretien = new ArrayCollection();
+        $this->inventaire = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -240,6 +257,78 @@ class Car
     public function setTypeCommande(string $type_commande): static
     {
         $this->type_commande = $type_commande;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): static
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entretien>
+     */
+    public function getEntretien(): Collection
+    {
+        return $this->entretien;
+    }
+
+    public function addEntretien(Entretien $entretien): static
+    {
+        if (!$this->entretien->contains($entretien)) {
+            $this->entretien->add($entretien);
+            $entretien->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntretien(Entretien $entretien): static
+    {
+        if ($this->entretien->removeElement($entretien)) {
+            // set the owning side to null (unless already changed)
+            if ($entretien->getCar() === $this) {
+                $entretien->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inventaire>
+     */
+    public function getInventaire(): Collection
+    {
+        return $this->inventaire;
+    }
+
+    public function addInventaire(Inventaire $inventaire): static
+    {
+        if (!$this->inventaire->contains($inventaire)) {
+            $this->inventaire->add($inventaire);
+            $inventaire->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInventaire(Inventaire $inventaire): static
+    {
+        if ($this->inventaire->removeElement($inventaire)) {
+            // set the owning side to null (unless already changed)
+            if ($inventaire->getCar() === $this) {
+                $inventaire->setCar(null);
+            }
+        }
 
         return $this;
     }

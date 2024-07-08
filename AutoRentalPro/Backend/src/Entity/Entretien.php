@@ -20,6 +20,9 @@ class Entretien
     #[ORM\Column(type: Types::TEXT)]
     private ?string $detail = null;
 
+    #[ORM\ManyToOne(inversedBy: 'entretien')]
+    private ?Car $car = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Entretien
     public function setDetail(string $detail): static
     {
         $this->detail = $detail;
+
+        return $this;
+    }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function setCar(?Car $car): static
+    {
+        $this->car = $car;
 
         return $this;
     }
